@@ -4,13 +4,12 @@
 #Implementation
     * Graph using Adjacency List
     
-#Graph Processing
-    * Breadth First Search using Queue
-    * Dijkstra using TreeSet
+#Graph Processing includes
+    * Breadth First Search and Dijkstra
     
-#Tested with JUNIT
+#Tested with JUnit
 
-#Graph Visualization using GraphStream
+#Visualized Graph using GraphStream API
 
 
 
