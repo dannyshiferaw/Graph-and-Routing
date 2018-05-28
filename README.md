@@ -14,8 +14,4 @@
 
 
 
-![Alt text](assets/graphstream.png?raw=true "graphstream")
-
-<p align="center">
-  <img src="assets/graphstream.png" width="350"/>
-</p>
+![Alt text](graphstream.png?raw=true "graphstream")
