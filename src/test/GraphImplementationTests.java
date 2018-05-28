@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 public class GraphImplementationTests {
 
     @Test
-    public void test() {
+    public void testGraphImplementation() {
         try {
             FileReader inputFileReader = new FileReader("/Users/daniel.shiferaw/Documents/Projects/Uber/Graph/src/test/inputs/GraphInput01.txt");
             BufferedReader inputBufferReader = new BufferedReader(inputFileReader);
@@ -38,13 +38,20 @@ public class GraphImplementationTests {
                 int numOfNodes = inputScanner.nextInt();
                 int numOfEdges = inputScanner.nextInt();
 
-                Graph graph = new UndirectedGraph(numOfNodes);
+                Graph graph = new UndirectedGraph();
+
+                //load nodes
+                for(int i = 1; i <= numOfNodes; i++) {
+                    graph.addNode(i);
+                }
+
                 for(int i = 0; i < numOfEdges; i++) {
                     int from = inputScanner.nextInt();
                     int to = inputScanner.nextInt();
                     float weight = inputScanner.nextInt();
                     graph.addEdge(new Edge(from, to, weight));
                 }
+                
                 inputScanner.nextInt();
 
 
@@ -64,6 +71,7 @@ public class GraphImplementationTests {
             System.out.println(e.getMessage());
         }
     }
+
 
 
 }

@@ -12,8 +12,6 @@ import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.*;
 
 public class main {
@@ -34,7 +32,12 @@ public class main {
 
 
         //populate the local graph with the data
-        Graph graph = new UndirectedGraph(nodes.size());
+        Graph graph = new UndirectedGraph();
+        //add nodes
+        for (DNode dnode: nodes) {
+            graph.addNode(dnode.getNodeId());
+        }
+        //add edges
         for (DEdge edge: edges) {
             graph.addEdge(new Edge(edge.getStartNodeId(), edge.getEndNodeId(), edge.getDist()));
         }

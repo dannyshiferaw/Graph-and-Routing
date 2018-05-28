@@ -41,7 +41,10 @@ public class DijkstraTests {
                     int numOfNodes = inputScanner.nextInt();
                     int numOfEdges = inputScanner.nextInt();
 
-                    Graph graph = new UndirectedGraph(numOfNodes);
+                    Graph graph = new UndirectedGraph();
+                    for (int i = 1; i <= numOfNodes; i++) {
+                        graph.addNode(i);
+                    }
                     for (int i = 0; i < numOfEdges; i++) {
                         int from = inputScanner.nextInt();
                         int to = inputScanner.nextInt();
@@ -51,14 +54,16 @@ public class DijkstraTests {
                     int source = inputScanner.nextInt();
 
                     Dijkstra djs = new Dijkstra(graph, source);
+
                     djs.dijkstra();
 
                     ArrayList<Integer> answer = new ArrayList<>();
-                    for (int i = 1; i <= graph.N(); i++) {
-                        if (i != source) {
-                            answer.add((int) djs.getDistTo(i));
+                    for(Integer n: graph.nodes()) {
+                        if (n != source) {
+                            answer.add((int) djs.getDistTo(n));
                         }
                     }
+
                     ArrayList<Integer> solution = new ArrayList<>();
                     String soln = outputScanner.nextLine();
                     Scanner lineScanner = new Scanner(soln);

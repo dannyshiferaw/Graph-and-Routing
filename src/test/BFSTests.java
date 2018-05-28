@@ -35,7 +35,12 @@ public class BFSTests {
                 int numOfNodes = inputScanner.nextInt();
                 int numOfEdges = inputScanner.nextInt();
 
-                Graph graph = new UndirectedGraph(numOfNodes);
+                Graph graph = new UndirectedGraph();
+                //load nodes
+                for(int i = 1; i <= numOfNodes; i++) {
+                    graph.addNode(i);
+                }
+                //load edges
                 for(int i = 0; i < numOfEdges; i++) {
                     int from = inputScanner.nextInt();
                     int to = inputScanner.nextInt();
@@ -47,11 +52,12 @@ public class BFSTests {
                 bfs.bfs();
 
                 ArrayList<Integer> answer = new ArrayList<>();
-                for (int i = 1; i <= graph.N(); i++) {
-                    if (i != source) {
-                        answer.add((int)bfs.getDistTo(i));
+                for(Integer n: graph.nodes()) {
+                    if(n != source) {
+                        answer.add((int)bfs.getDistTo(n));
                     }
                 }
+
                 ArrayList<Integer> solution = new ArrayList<>();
                 while(outputScanner.hasNext()) {
                     solution.add(outputScanner.nextInt());

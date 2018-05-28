@@ -72,15 +72,15 @@ public class Dijkstra {
      * Breadth First Search
      */
     public void dijkstra() {
-        TreeSet<Node> pq = new TreeSet<>();
-        for (int i = 0; i < graph.N(); i++) {
-            distTo.put(i, Float.POSITIVE_INFINITY);
+        TreeSet<Node> fringe = new TreeSet<>();
+        for(Integer n: graph.nodes()) {
+            distTo.put(n, Float.POSITIVE_INFINITY);
         }
         distTo.put(source, 0.0f);
-        pq.add(new Node(source, 0.0f));
+        fringe.add(new Node(source, 0.0f));
         visited_Nodes.add(source);
-        while(!pq.isEmpty()) {
-            Node from = pq.pollFirst();
+        while(!fringe.isEmpty()) {
+            Node from = fringe.pollFirst();
             for (Edge edge: graph.getAdjacents(from.n())) {
                 int to = edge.other(from.n());
                 float oldWeight = distTo.get(to);
@@ -92,8 +92,8 @@ public class Dijkstra {
                     path.put(to, from.n());
                     Node updatedNode = new Node(to, newWeight);
                     Node oldNode = new Node(to, oldWeight);
-                    pq.remove(oldNode);
-                    pq.add(updatedNode);
+                    fringe.remove(oldNode);
+                    fringe.add(updatedNode);
                 }
             }
         }
