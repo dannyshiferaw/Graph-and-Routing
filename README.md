@@ -1,3 +1,4 @@
+
 #Graph and Routing
 
 #Implementation
@@ -9,4 +10,12 @@
     
 #Tested with JUNIT
 
-#Graph Visualization using GraphStream 
+#Graph Visualization using GraphStream
+
+
+
+![Alt text](assets/graphstream.png?raw=true "graphstream")
+
+<p align="center">
+  <img src="assets/graphstream.png" width="350"/>
+</p>

@@ -10,6 +10,9 @@ import com.dshiferaw.Graph_Routing.Import_Data.DNode;
 import com.dshiferaw.Graph_Routing.Import_Data.SFRoadService;
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
+import org.graphstream.ui.spriteManager.Sprite;
+import org.graphstream.ui.spriteManager.SpriteManager;
+import static org.graphstream.algorithm.Toolkit.*;
 
 
 import java.util.*;
@@ -55,10 +58,12 @@ public class main {
         String styleSheet =
                 "node {" +
                         "	fill-color: black;" +
+                        "   text-size: 20px; " +
                         "}" +
                         "node.marked {" +
                         "	fill-color: red;" +
                         "}";
+
 
 
         //visualization graph
@@ -66,6 +71,7 @@ public class main {
         g.addAttribute("ui.stylesheet", styleSheet);
         g.setAutoCreate(true);
         g.setStrict(false);
+
 
         //load Nodes
         for(DNode node: nodes) {
@@ -81,8 +87,21 @@ public class main {
         //display graph
         g.display();
 
+        //add pins at start and end
+        SpriteManager spriteManager = new SpriteManager(g);
+        Sprite s1 = spriteManager.addSprite("startNode");
+        Sprite s2 = spriteManager.addSprite("endNode");
+        double[] s1Position = nodePosition(g.getNode(path.get(0)));
+        double[] s2Position = nodePosition(g.getNode(path.get(path.size()-1)));
+        s1.setPosition(s1Position[0], s1Position[1], s1Position[2]);
+        s2.setPosition(s2Position[0], s2Position[1], s2Position[2]);
+
+        g.getNode(path.get(0)).addAttribute("ui.label", path.get(0));
+        g.getNode(path.get(path.size()-1)).addAttribute("ui.label", path.get(path.size() -1 ));
+
+
+
         //display shortest path on graph
-        sleep();
         Iterator<Integer> p =  path.iterator();
         while(p.hasNext()) {
             Node next = g.getNode(p.next());
@@ -95,7 +114,7 @@ public class main {
 
     private static void sleep() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (Exception e) {
             e.printStackTrace();
         }
