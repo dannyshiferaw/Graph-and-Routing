@@ -46,6 +46,6 @@ public class Edge implements Comparable<Edge> {
     /** String representation of this edge */
     @Override
     public String toString() {
-        return from + "- " + to;
+        return from + " - " + to;
     }
 }

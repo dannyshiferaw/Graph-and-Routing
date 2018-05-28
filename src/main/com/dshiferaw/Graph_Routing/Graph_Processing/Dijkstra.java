@@ -73,7 +73,7 @@ public class Dijkstra {
      */
     public void dijkstra() {
         TreeSet<Node> pq = new TreeSet<>();
-        for (int i = 1; i <= graph.N(); i++) {
+        for (int i = 0; i < graph.N(); i++) {
             distTo.put(i, Float.POSITIVE_INFINITY);
         }
         distTo.put(source, 0.0f);
@@ -115,9 +115,12 @@ public class Dijkstra {
      */
     public List<Integer> getPathTo(int n) {
         Stack<Integer> p = new Stack<>();
-        while(n != source) {
-            p.push(n);
-            n = path.get(n);
+        if (hasPathTo(n)) {
+            while(n != source) {
+                p.push(n);
+                n = path.get(n);
+            }
+            p.add(source);
         }
         return p;
     }

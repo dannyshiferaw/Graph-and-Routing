@@ -19,9 +19,9 @@ public class UndirectedGraph implements Graph{
     public UndirectedGraph(int numOfNodes) {
         this.numOfNodes = numOfNodes ;
         this.numOfEdges = 0;
-        this.nodes = new ArrayList<>(this.numOfNodes + 1);
+        this.nodes = new ArrayList<>(this.numOfNodes);
 
-        for (int i = 0; i <= this.numOfNodes; i++) {
+        for (int i = 0; i < this.numOfNodes; i++) {
             this.nodes.add(i, new ArrayList<>());
         }
     }
@@ -68,7 +68,7 @@ public class UndirectedGraph implements Graph{
     @Override
     public Iterable<Edge> edges() {
         List<Edge> edges = new LinkedList<>();
-        for (int n = 1; n <= numOfNodes; n++) {
+        for (int n = 0; n < numOfNodes; n++) {
             for (Edge e: getAdjacents(n)) {
                 if (e.other(n) != n) {
                     edges.add(e);

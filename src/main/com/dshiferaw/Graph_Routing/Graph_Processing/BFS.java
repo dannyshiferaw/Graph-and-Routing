@@ -62,9 +62,12 @@ public class BFS {
 
     public List<Integer> getPathTo(int n) {
         Stack<Integer> p = new Stack<>();
-        while(n != source) {
-            p.push(n);
-            n = path.get(n);
+        if (hasPathTo(n)) {
+            while(n != source) {
+                p.push(n);
+                n = path.get(n);
+            }
+            p.add(source);
         }
         return p;
     }
