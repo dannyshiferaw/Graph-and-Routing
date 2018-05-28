@@ -13,7 +13,7 @@ import com.dshiferaw.Graph_Routing.Graph.Graph;
 
 import java.util.*;
 
-public class Dijkstra {
+public class Dijkstra implements Paths{
 
     public class Node implements Comparable<Node> {
 
@@ -57,14 +57,12 @@ public class Dijkstra {
     public Dijkstra(Graph graph, int source) {
         this.graph = graph;
         this.source = source;
-        this.visited_Nodes = new HashSet<>();
         this.path = new HashMap<>();
         this.distTo = new HashMap<>();
     }
 
     private Graph graph;
     private int source;
-    private HashSet<Integer> visited_Nodes;
     private HashMap<Integer, Integer> path;
     private HashMap<Integer, Float> distTo;
 
@@ -78,7 +76,6 @@ public class Dijkstra {
         }
         distTo.put(source, 0.0f);
         fringe.add(new Node(source, 0.0f));
-        visited_Nodes.add(source);
         while(!fringe.isEmpty()) {
             Node from = fringe.pollFirst();
             for (Edge edge: graph.getAdjacents(from.n())) {
@@ -86,8 +83,8 @@ public class Dijkstra {
                 float oldWeight = distTo.get(to);
                 float newWeight = edge.weight() + from.weight();
                 //if there is a shorter distance to a node
-                //delete the previous one, and add the newupdate
-                if (oldWeight > newWeight && !visited_Nodes.contains(to)) {
+                //delete the previous one, and add the new update
+                if (oldWeight > newWeight) {
                     distTo.put(to, newWeight);
                     path.put(to, from.n());
                     Node updatedNode = new Node(to, newWeight);
@@ -104,6 +101,7 @@ public class Dijkstra {
      * Returns true if there exists a path to a node,
      * or if a given node is the source node
      */
+    @Override
     public boolean hasPathTo(int n) {
         return path.get(n) != null || n == source;
     }
@@ -113,15 +111,17 @@ public class Dijkstra {
      * @param n
      * @return path
      */
+    @Override
     public List<Integer> getPathTo(int n) {
-        Stack<Integer> p = new Stack<>();
+        List<Integer> p = new LinkedList<>();
         if (hasPathTo(n)) {
             while(n != source) {
-                p.push(n);
+                p.add(n);
                 n = path.get(n);
             }
             p.add(source);
         }
+        Collections.reverse(p);
         return p;
     }
 
@@ -130,6 +130,7 @@ public class Dijkstra {
      * @param n
      * @return weight
      */
+    @Override
     public float getDistTo(int n) {
         if (hasPathTo(n)) {
             return distTo.get(n);

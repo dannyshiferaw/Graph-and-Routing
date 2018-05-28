@@ -10,7 +10,6 @@
 package com.dshiferaw.Graph_Routing.Graph;
 
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -18,17 +17,6 @@ import java.util.List;
 
 
 public class UndirectedGraph implements Graph{
-
-    public UndirectedGraph(int numOfNodes) {
-        this.numOfNodes = numOfNodes ;
-        this.numOfEdges = 0;
-        this.nodes = new ArrayList<>(this.numOfNodes);
-        this.node_map = new HashMap<>();
-
-        for (int i = 0; i < this.numOfNodes; i++) {
-            this.nodes.add(i, new ArrayList<>());
-        }
-    }
 
     public UndirectedGraph() {
         this.numOfNodes = 0;
@@ -82,10 +70,6 @@ public class UndirectedGraph implements Graph{
      */
     @Override
     public void addEdge(Edge edge) {
-//        int to = edge.either(), from = edge.other(to);
-//        nodes.get(from).add(edge);
-//        nodes.get(to).add(edge);
-//        numOfEdges++;
         int to = edge.either(), from = edge.other(to);
         nodes.get(getIndex(from)).add(edge);
         nodes.get(getIndex(to)).add(edge);

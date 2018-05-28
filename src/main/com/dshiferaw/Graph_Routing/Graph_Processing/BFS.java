@@ -13,7 +13,7 @@ import com.dshiferaw.Graph_Routing.Graph.Graph;
 
 import java.util.*;
 
-public class BFS {
+public class BFS implements Paths{
 
     public BFS(Graph graph, int source) {
         this.graph = graph;
@@ -61,16 +61,18 @@ public class BFS {
     }
 
     public List<Integer> getPathTo(int n) {
-        Stack<Integer> p = new Stack<>();
+        List<Integer> p = new LinkedList<>();
         if (hasPathTo(n)) {
             while(n != source) {
-                p.push(n);
+                p.add(n);
                 n = path.get(n);
             }
             p.add(source);
         }
+        Collections.reverse(p);
         return p;
     }
+
 
     public float getDistTo(int n) {
         if (hasPathTo(n)) {

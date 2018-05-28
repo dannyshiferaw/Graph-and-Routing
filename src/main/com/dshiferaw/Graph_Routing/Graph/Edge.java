@@ -33,6 +33,15 @@ public class Edge implements Comparable<Edge> {
         else throw new RuntimeException("Such Edge Doesn't Exist");
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass().equals(this.getClass())) {
+            Edge other = (Edge) o;
+            if (other.to == this.to && other.from == this.from) return true;
+        }
+        return false;
+    }
+
     /** Compares this edge with another
      *
      * @param o
